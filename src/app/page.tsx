@@ -132,6 +132,10 @@ const Section = styled.section`
   padding: 6rem 0;
 `;
 
+const SkillSection = styled.section`
+  padding: 4rem 0;
+`;
+
 const SectionTitle = styled.h3`
   font-size: 2rem;
   font-weight: 700;
@@ -140,30 +144,24 @@ const SectionTitle = styled.h3`
 `;
 
 const SkillsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 `;
 
 const SkillItem = styled.div`
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 500;
   color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  background-color: var(--bg-secondary);
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  transition: transform 0.2s ease;
+  cursor: default;
 
-  &::before {
-    content: "";
-    display: block;
-    width: 8px;
-    height: 8px;
-    background-color: #a5b4fc;
-    border-radius: 50%;
+  &:hover {
+    background-color: var(--bg-tertiary);
+    transform: translateY(-2px);
   }
 `;
 
@@ -343,14 +341,14 @@ export default function Home() {
           </HeroContent>
         </Header>
 
-        <Section>
+        <SkillSection>
           <SectionTitle>{homeContent.skills.title}</SectionTitle>
           <SkillsGrid>
             {homeContent.skills.items.map((skill) => (
               <SkillItem key={skill}>{skill}</SkillItem>
             ))}
           </SkillsGrid>
-        </Section>
+        </SkillSection>
 
         <Section id="projects">
           <SectionTitle>{homeContent.projects.title}</SectionTitle>
