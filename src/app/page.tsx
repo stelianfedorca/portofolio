@@ -5,8 +5,8 @@ import Image from "next/image";
 
 const Container = styled.main`
   min-height: 100vh;
-  background-color: #ffffff;
-  color: #111111;
+  /* background-color: #ffffff;
+  color: #111111; */
   font-family: var(--font-plus-jakarta-sans);
 `;
 
@@ -55,7 +55,7 @@ const SocialLinks = styled.div`
 const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 4rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -73,6 +73,7 @@ const ProfileImageWrapper = styled.div`
   overflow: hidden;
   box-shadow: 20px 20px 60px #e0e0e0, -20px -20px 60px #ffffff;
   margin: 2rem auto 0;
+  margin-top: 16px;
 
   @media (min-width: 768px) {
     /* margin: 4rem 0 0 0; */
@@ -98,31 +99,33 @@ const Greeting = styled.h1`
   @media (min-width: 768px) {
     font-size: 4.5rem;
   }
+
+  span {
+    color: var(--accent);
+  }
 `;
 
 const Subtitle = styled.h2`
   font-size: 3rem;
   font-weight: 800;
   line-height: 1.1;
-  color: #111;
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
 
   span {
-    color: #a5b4fc; /* Pastel indigo/blue similar to the reference */
     position: relative;
     display: inline-block;
 
-    &::after {
+    /* &::after {
       content: "";
       position: absolute;
-      bottom: 5px;
+      bottom: -5px;
       left: 0;
       width: 100%;
-      height: 15px;
-      background-color: rgba(165, 180, 252, 0.2);
+      height: 30px;
+      background-color: #a5b4fc;
       z-index: -1;
-    }
+    } */
   }
 
   @media (min-width: 768px) {
@@ -316,7 +319,9 @@ export default function Home() {
 
           <HeroContent>
             <HeroText>
-              <Greeting>Hi there, I&apos;m Stelian.</Greeting>
+              <Greeting>
+                Hi there, I&apos;m <span>Stelian</span>
+              </Greeting>
               <Subtitle>
                 Frontend <span>Engineer</span>
               </Subtitle>
