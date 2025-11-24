@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
-import Image from 'next/image';
+import styled from "styled-components";
+import Image from "next/image";
 
 const Container = styled.main`
   min-height: 100vh;
   background-color: #ffffff;
   color: #111111;
-  font-family: var(--font-geist-sans);
+  font-family: var(--font-plus-jakarta-sans);
 `;
 
 const MaxWidthWrapper = styled.div`
@@ -20,7 +20,7 @@ const MaxWidthWrapper = styled.div`
 
 const Header = styled.header`
   padding: 4rem 0 2rem;
-  
+
   @media (min-width: 768px) {
     padding: 6rem 0 4rem;
   }
@@ -42,11 +42,13 @@ const Logo = styled.div`
 const SocialLinks = styled.div`
   display: flex;
   gap: 1.5rem;
-  
+
   a {
     color: #666;
     transition: color 0.2s;
-    &:hover { color: #000; }
+    &:hover {
+      color: #000;
+    }
   }
 `;
 
@@ -54,7 +56,7 @@ const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  
+
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
@@ -66,17 +68,17 @@ const ProfileImageWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 280px;
-  aspect-ratio: 3/4;
-  border-radius: 12px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   overflow: hidden;
   box-shadow: 20px 20px 60px #e0e0e0, -20px -20px 60px #ffffff;
-  margin: 0 auto;
+  margin: 2rem auto 0;
 
   @media (min-width: 768px) {
     /* margin: 4rem 0 0 0; */
     width: 320px;
   }
-  
+
   img {
     object-fit: cover;
   }
@@ -110,9 +112,9 @@ const Subtitle = styled.h2`
     color: #a5b4fc; /* Pastel indigo/blue similar to the reference */
     position: relative;
     display: inline-block;
-    
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 5px;
       left: 0;
@@ -148,7 +150,7 @@ const HeroImageContainer = styled.div`
   @media (min-width: 768px) {
     height: 600px;
   }
-  
+
   img {
     object-fit: cover;
   }
@@ -171,7 +173,7 @@ const SkillsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
-  
+
   @media (min-width: 640px) {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -186,7 +188,7 @@ const SkillItem = styled.div`
   gap: 0.5rem;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     width: 8px;
     height: 8px;
@@ -201,7 +203,7 @@ const WorkGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   gap: 4rem;
-  
+
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -226,7 +228,7 @@ const ProjectImage = styled.div`
   position: relative;
   overflow: hidden;
   border-radius: 4px;
-  
+
   img {
     object-fit: cover;
     transition: transform 0.5s ease;
@@ -270,7 +272,7 @@ const FooterTitle = styled.h2`
   font-size: 2.5rem;
   font-weight: 800;
   margin-bottom: 1.5rem;
-  
+
   @media (min-width: 768px) {
     font-size: 3.5rem;
   }
@@ -311,34 +313,25 @@ export default function Home() {
               <a href="#">Github</a>
             </SocialLinks>
           </TopNav>
-          
+
           <HeroContent>
             <HeroText>
               <Greeting>Hi there, I&apos;m Stelian.</Greeting>
-              <Subtitle>Frontend <span>Engineer</span></Subtitle>
+              <Subtitle>
+                Frontend <span>Engineer</span>
+              </Subtitle>
               <IntroText>
-                I’m a frontend engineer based in Romania, turning ideas into clean, performant web apps with React and Next.js. I care about accessibility, smooth interactions, and the tiny details most people only feel.
+                I’m a frontend engineer based in Romania, turning ideas into
+                clean, performant web apps with React and Next.js. I care about
+                accessibility, smooth interactions, and the tiny details most
+                people only feel.
               </IntroText>
             </HeroText>
 
-            {/* <ProfileImageWrapper>
-              <Image 
-                src="/profile.jpg" 
-                alt="Stelian" 
-                fill 
-                priority
-              />
-            </ProfileImageWrapper> */}
+            <ProfileImageWrapper>
+              <Image src="/Me.jpeg" alt="Stelian" fill priority />
+            </ProfileImageWrapper>
           </HeroContent>
-
-          {/* <HeroImageContainer>
-            <Image 
-              src="/hero.png" 
-              alt="Workspace" 
-              fill 
-              priority
-            />
-          </HeroImageContainer> */}
         </Header>
 
         <Section>
@@ -363,16 +356,22 @@ export default function Home() {
                 <Image src="/project1.png" alt="Project 1" fill />
               </ProjectImage>
               <ProjectTitle>Analytics Dashboard</ProjectTitle>
-              <ProjectDesc>A modern analytics platform for tracking user engagement and growth metrics.</ProjectDesc>
+              <ProjectDesc>
+                A modern analytics platform for tracking user engagement and
+                growth metrics.
+              </ProjectDesc>
               <ProjectLink>View Project</ProjectLink>
             </ProjectCard>
-            
+
             <ProjectCard>
               <ProjectImage>
                 <Image src="/project2.png" alt="Project 2" fill />
               </ProjectImage>
               <ProjectTitle>Travel Companion App</ProjectTitle>
-              <ProjectDesc>Mobile-first application helping travelers find the best local spots and hidden gems.</ProjectDesc>
+              <ProjectDesc>
+                Mobile-first application helping travelers find the best local
+                spots and hidden gems.
+              </ProjectDesc>
               <ProjectLink>View Project</ProjectLink>
             </ProjectCard>
           </WorkGrid>
@@ -383,9 +382,12 @@ export default function Home() {
         <MaxWidthWrapper>
           <FooterTitle>Let&apos;s Build Something Together</FooterTitle>
           <FooterText>
-            Have a project in mind? I&apos;m always open to discussing new opportunities and interesting projects.
+            Have a project in mind? I&apos;m always open to discussing new
+            opportunities and interesting projects.
           </FooterText>
-          <ContactButton href="mailto:hello@stelian.com">Get in touch</ContactButton>
+          <ContactButton href="mailto:hello@stelian.com">
+            Get in touch
+          </ContactButton>
         </MaxWidthWrapper>
       </Footer>
     </Container>
