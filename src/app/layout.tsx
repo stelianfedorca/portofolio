@@ -11,8 +11,9 @@ import StyledComponentsRegistry from "@/lib/registry";
 import StickyHeader from "@/components/StickyHeader";
 
 export const metadata: Metadata = {
-  title: "Stelian | Frontend Engineer",
-  description: "Personal Portofolio",
+  title: "Stelian Fedorca | Frontend Engineer",
+  description:
+    "Portfolio of Stelian Fedorca, a Frontend Engineer based in Romania.",
 };
 
 export default function RootLayout({
