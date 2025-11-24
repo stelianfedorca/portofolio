@@ -44,7 +44,7 @@ export const homeContent = {
     cta: "Get in touch",
     email: "mailto:stelian.fedorca25@gmail.com",
     socialLinks: {
-      linkedin: "https://linkedin.com/in/stelianfedorca",
+      linkedin: "https://www.linkedin.com/in/stelian-fedorca-08a4b7186/",
       github: "https://github.com/stelianfedorca",
     },
   },

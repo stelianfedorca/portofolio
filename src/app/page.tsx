@@ -5,11 +5,10 @@ import Image from "next/image";
 import { homeContent } from "@/content/home";
 import Link from "next/link";
 import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
 
 const Container = styled.main`
   min-height: 100vh;
-  /* background-color: #ffffff;
-  color: #111111; */
   font-family: var(--font-plus-jakarta-sans);
 `;
 
@@ -234,20 +233,16 @@ const ProjectLink = styled.span`
 // --- Footer ---
 
 const Footer = styled.footer`
-  padding-top 6rem;
   padding-bottom: 4rem;
   background-color: var(--bg-secondary);
   margin-top: 4rem;
+  padding-top: 2rem;
 `;
 
-const FooterTitle = styled.h2`
-  font-size: 2.5rem;
+const FooterTitle = styled.h3`
   font-weight: 800;
+  font-size: 2rem;
   margin-bottom: 1.5rem;
-
-  @media (min-width: 768px) {
-    font-size: 3.5rem;
-  }
 `;
 
 const FooterText = styled.p`
@@ -298,22 +293,31 @@ const SocialLink = styled.a`
   align-items: center;
   gap: 0.5rem;
   font-size: 1rem;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   text-decoration: none;
   transition: color 0.2s;
 
   svg {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   &:hover {
-    color: var(--text-primary);
+    color: var(--accent2);
   }
+`;
+
+const EmailText = styled.span`
+  /* color: var(--text-primary);
+  transition: color 0.2s;
+
+  ${SocialLink}:hover & {
+    color: var(--accent2);
+  } */
 `;
 
 const SubFooter = styled.div`
   padding-top: 2rem;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   border-top: 1px solid var(--border-color);
   font-size: 0.9rem;
   color: var(--text-secondary);
@@ -371,7 +375,7 @@ export default function Home() {
 
           <SocialLinksWrapper>
             <SocialLink href={homeContent.footer.email}>
-              <FaEnvelope /> stelian.fedorca25@gmail.com
+              <FaEnvelope /> <EmailText>stelian.fedorca25@gmail.com</EmailText>
             </SocialLink>
 
             <SocialLink
@@ -379,7 +383,8 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaLinkedin /> Stelian Fedorca
+              <FaLinkedin /> LinkedIn{" "}
+              <FiExternalLink style={{ fontSize: "0.9rem", opacity: 0.7 }} />
             </SocialLink>
 
             <SocialLink
@@ -387,7 +392,8 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <FaGithub /> stelianfedorca
+              <FaGithub /> GitHub{" "}
+              <FiExternalLink style={{ fontSize: "0.9rem", opacity: 0.7 }} />
             </SocialLink>
           </SocialLinksWrapper>
 

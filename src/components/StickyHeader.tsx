@@ -68,17 +68,17 @@ const NavigationLinks = styled.div`
 `;
 
 export default function StickyHeader() {
+  function scrollToTop(event: React.MouseEvent) {
+    event.preventDefault();
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <StickyHeaderWrapper>
       <MaxWidthWrapper>
         <TopNav>
-          <BrandName
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
+          <BrandName href="/" onClick={scrollToTop}>
             Stelian Fedorca
           </BrandName>
           <NavigationLinks>
