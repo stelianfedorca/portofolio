@@ -52,6 +52,11 @@ const SocialLinks = styled.div`
   }
 `;
 
+const Links = styled.nav`
+  display: flex;
+  gap: 1.5rem;
+`;
+
 const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -310,11 +315,10 @@ export default function Home() {
         <Header>
           <TopNav>
             <Logo>SF.</Logo>
-            <SocialLinks>
-              <a href="#">Instagram</a>
-              <a href="#">Twitter</a>
-              <a href="#">Github</a>
-            </SocialLinks>
+            <Links>
+              <a href="#projects">Projects</a>
+              <a href="#contact">Contact</a>
+            </Links>
           </TopNav>
 
           <HeroContent>
@@ -353,7 +357,7 @@ export default function Home() {
           </SkillsGrid>
         </Section>
 
-        <Section>
+        <Section id="projects">
           <SectionTitle>What I&apos;ve been working on</SectionTitle>
           <WorkGrid>
             <ProjectCard>
@@ -383,7 +387,7 @@ export default function Home() {
         </Section>
       </MaxWidthWrapper>
 
-      <Footer>
+      <Footer id="contact">
         <MaxWidthWrapper>
           <FooterTitle>Let&apos;s Build Something Together</FooterTitle>
           <FooterText>
