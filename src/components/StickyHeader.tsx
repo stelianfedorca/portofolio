@@ -72,6 +72,9 @@ export default function StickyHeader() {
     event.preventDefault();
 
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Remove hash from URL
+    window.history.pushState(null, "", window.location.pathname);
   }
 
   return (
