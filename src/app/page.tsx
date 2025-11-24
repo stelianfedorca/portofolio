@@ -2,7 +2,6 @@
 
 import styled from "styled-components";
 import Image from "next/image";
-import Link from "next/link";
 import { homeContent } from "@/content/home";
 
 const Container = styled.main`
@@ -21,67 +20,10 @@ const MaxWidthWrapper = styled.div`
 // --- Header / Hero Section ---
 
 const Header = styled.header`
-  padding: 4rem 0 2rem;
+  padding: 2rem 0 2rem;
 
   @media (min-width: 768px) {
-    padding: 4rem 0 4rem;
-  }
-`;
-
-const TopNav = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 4rem;
-`;
-
-const Logo = styled(Link)`
-  font-weight: 900;
-  font-size: 1.5rem;
-  letter-spacing: -1px;
-`;
-
-const SocialLinks = styled.div`
-  display: flex;
-  gap: 1.5rem;
-
-  a {
-    color: #666;
-    transition: color 0.2s;
-    &:hover {
-      color: #000;
-    }
-  }
-`;
-
-const NavigationLinks = styled.nav`
-  display: flex;
-  gap: 1.5rem;
-
-  a {
-    text-transform: uppercase;
-    font-weight: 600;
-    position: relative;
-    letter-spacing: 0.05em;
-
-    &:hover {
-      color: var(--accent2);
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: var(--accent2);
-      transition: width 0.3s;
-    }
-
-    &:hover::before {
-      width: 100%;
-    }
+    padding: 2rem 0 4rem;
   }
 `;
 
@@ -341,14 +283,6 @@ export default function Home() {
     <Container>
       <MaxWidthWrapper>
         <Header>
-          <TopNav>
-            <Logo href="/">SF.</Logo>
-            <NavigationLinks>
-              <a href="#projects">Projects</a>
-              <a href="#contact">Contact</a>
-            </NavigationLinks>
-          </TopNav>
-
           <HeroContent>
             <HeroText>
               <Greeting>

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useServerInsertedHTML } from "next/navigation";
-import { ServerStyleSheet, StyleSheetManager } from "styled-components";
+import styled, { ServerStyleSheet, StyleSheetManager } from "styled-components";
 
 export default function StyledComponentsRegistry({
   children,
@@ -23,9 +23,13 @@ export default function StyledComponentsRegistry({
     return <>{children}</>;
   }
 
+  const Container = styled.div`
+    position: relative;
+  `;
+
   return (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
-      {children}
+      <Container>{children}</Container>
     </StyleSheetManager>
   );
 }
