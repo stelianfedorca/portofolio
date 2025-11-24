@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 const Container = styled.main`
   min-height: 100vh;
@@ -22,18 +23,18 @@ const Header = styled.header`
   padding: 4rem 0 2rem;
 
   @media (min-width: 768px) {
-    padding: 6rem 0 4rem;
+    padding: 4rem 0 4rem;
   }
 `;
 
 const TopNav = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   margin-bottom: 4rem;
 `;
 
-const Logo = styled.div`
+const Logo = styled(Link)`
   font-weight: 900;
   font-size: 1.5rem;
   letter-spacing: -1px;
@@ -52,9 +53,18 @@ const SocialLinks = styled.div`
   }
 `;
 
-const Links = styled.nav`
+const NavigationLinks = styled.nav`
   display: flex;
   gap: 1.5rem;
+
+  a {
+    text-transform: uppercase;
+    font-weight: 600;
+
+    &:hover {
+      color: var(--accent2);
+    }
+  }
 `;
 
 const HeroContent = styled.div`
@@ -106,7 +116,7 @@ const Greeting = styled.h1`
   }
 
   span {
-    color: var(--accent);
+    color: var(--accent2);
   }
 `;
 
@@ -314,11 +324,11 @@ export default function Home() {
       <MaxWidthWrapper>
         <Header>
           <TopNav>
-            <Logo>SF.</Logo>
-            <Links>
+            <Logo href="/">SF.</Logo>
+            <NavigationLinks>
               <a href="#projects">Projects</a>
               <a href="#contact">Contact</a>
-            </Links>
+            </NavigationLinks>
           </TopNav>
 
           <HeroContent>
