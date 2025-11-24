@@ -12,7 +12,8 @@ const StickyHeaderWrapper = styled.div`
   background: color-mix(in srgb, var(--background), transparent 30%);
   backdrop-filter: blur(10px);
   padding: 1rem 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
 `;
 
 const MaxWidthWrapper = styled.div`

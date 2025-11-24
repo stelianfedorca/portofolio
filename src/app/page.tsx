@@ -46,7 +46,7 @@ const ProfileImageWrapper = styled.div`
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 20px 20px 60px #e0e0e0, -20px -20px 60px #ffffff;
+  box-shadow: var(--box-shadow);
   margin: 2rem auto 0;
   margin-top: 16px;
 
@@ -70,6 +70,7 @@ const Greeting = styled.h1`
   line-height: 1.1;
   margin-bottom: 1rem;
   letter-spacing: -0.03em;
+  color: var(--text-primary);
 
   @media (min-width: 768px) {
     font-size: 4.5rem;
@@ -86,6 +87,7 @@ const Subtitle = styled.h2`
   line-height: 1.1;
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
+  color: var(--text-primary);
 
   span {
     position: relative;
@@ -111,7 +113,7 @@ const Subtitle = styled.h2`
 const IntroText = styled.p`
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #555;
+  color: var(--text-secondary);
   max-width: 600px;
   margin-top: 2rem;
 `;
@@ -123,7 +125,7 @@ const HeroImageContainer = styled.div`
   position: relative;
   border-radius: 2px;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: var(--bg-secondary);
 
   @media (min-width: 768px) {
     height: 600px;
@@ -160,7 +162,7 @@ const SkillsGrid = styled.div`
 const SkillItem = styled.div`
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -202,7 +204,7 @@ const ProjectCard = styled.div`
 const ProjectImage = styled.div`
   width: 100%;
   aspect-ratio: 16/10;
-  background-color: #f0f0f0;
+  background-color: var(--bg-tertiary);
   position: relative;
   overflow: hidden;
   border-radius: 4px;
@@ -225,7 +227,7 @@ const ProjectTitle = styled.h4`
 
 const ProjectDesc = styled.p`
   font-size: 1rem;
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.5;
   margin: 0;
 `;
@@ -233,7 +235,7 @@ const ProjectDesc = styled.p`
 const ProjectLink = styled.span`
   font-size: 0.9rem;
   font-weight: 600;
-  color: #111;
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 4px;
 `;
@@ -242,7 +244,7 @@ const ProjectLink = styled.span`
 
 const Footer = styled.footer`
   padding: 6rem 0;
-  background-color: #fafafa;
+  background-color: var(--bg-secondary);
   margin-top: 4rem;
 `;
 
@@ -258,7 +260,7 @@ const FooterTitle = styled.h2`
 
 const FooterText = styled.p`
   font-size: 1.1rem;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 2rem;
   max-width: 500px;
 `;
@@ -266,15 +268,15 @@ const FooterText = styled.p`
 const ContactButton = styled.a`
   display: inline-block;
   padding: 1rem 2rem;
-  background-color: #111;
-  color: #fff;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   font-weight: 600;
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #333;
+    background-color: var(--text-secondary);
   }
 `;
 
