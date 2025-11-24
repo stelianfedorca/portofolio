@@ -28,10 +28,12 @@ const TopNav = styled.nav`
   align-items: baseline;
 `;
 
-const Logo = styled(Link)`
-  font-weight: 900;
+const BrandName = styled(Link)`
+  font-weight: 600;
   font-size: 1.5rem;
   letter-spacing: -1px;
+
+  color: var(--accent2);
 `;
 
 const NavigationLinks = styled.div`
@@ -70,7 +72,15 @@ export default function StickyHeader() {
     <StickyHeaderWrapper>
       <MaxWidthWrapper>
         <TopNav>
-          <Logo href="/">SF.</Logo>
+          <BrandName
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            Stelian Fedorca
+          </BrandName>
           <NavigationLinks>
             <a href="/#projects">Projects</a>
             <a href="/#contact">Contact</a>

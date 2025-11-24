@@ -23,6 +23,7 @@
     --box-shadow: 20px 20px 60px #1a1a1a, -20px -20px 60px #000000;
 
     --text-primary: #e6e7e8;
+
     --text-secondary: #a1a7b3;
     --bg-secondary: #171717;
     --bg-tertiary: #262626;
@@ -40,6 +41,7 @@ body {
   line-height: 1.5;
 
   padding-top: var(--header-height);
+  scroll-padding-top: var(--header-height); /* Fixes anchor link scrolling */
 }
 
 body {
@@ -69,4 +71,13 @@ a {
 #root,
 #__next {
   isolation: isolate;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-primary);
 }

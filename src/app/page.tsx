@@ -3,6 +3,8 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { homeContent } from "@/content/home";
+import Link from "next/link";
+import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 
 const Container = styled.main`
   min-height: 100vh;
@@ -92,17 +94,6 @@ const Subtitle = styled.h2`
   span {
     position: relative;
     display: inline-block;
-
-    /* &::after {
-      content: "";
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 30px;
-      background-color: #a5b4fc;
-      z-index: -1;
-    } */
   }
 
   @media (min-width: 768px) {
@@ -243,7 +234,8 @@ const ProjectLink = styled.span`
 // --- Footer ---
 
 const Footer = styled.footer`
-  padding: 6rem 0;
+  padding-top 6rem;
+  padding-bottom: 4rem;
   background-color: var(--bg-secondary);
   margin-top: 4rem;
 `;
@@ -278,6 +270,53 @@ const ContactButton = styled.a`
   &:hover {
     background-color: var(--text-secondary);
   }
+`;
+
+const FooterEmail = styled(Link)`
+  display: block;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+  }
+`;
+
+const SocialLinksWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: fit-content;
+`;
+
+const SocialLink = styled.a`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  svg {
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    color: var(--text-primary);
+  }
+`;
+
+const SubFooter = styled.div`
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 `;
 
 export default function Home() {
@@ -329,10 +368,30 @@ export default function Home() {
       <Footer id="contact">
         <MaxWidthWrapper>
           <FooterTitle>{homeContent.footer.title}</FooterTitle>
-          <FooterText>{homeContent.footer.text}</FooterText>
-          <ContactButton href={homeContent.footer.email}>
-            {homeContent.footer.cta}
-          </ContactButton>
+
+          <SocialLinksWrapper>
+            <SocialLink href={homeContent.footer.email}>
+              <FaEnvelope /> stelian.fedorca25@gmail.com
+            </SocialLink>
+
+            <SocialLink
+              href={homeContent.footer.socialLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedin /> Stelian Fedorca
+            </SocialLink>
+
+            <SocialLink
+              href={homeContent.footer.socialLinks.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaGithub /> stelianfedorca
+            </SocialLink>
+          </SocialLinksWrapper>
+
+          <SubFooter>© 2021-present Stelian Fedorca</SubFooter>
         </MaxWidthWrapper>
       </Footer>
     </Container>
