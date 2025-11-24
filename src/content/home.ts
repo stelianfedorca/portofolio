@@ -39,9 +39,13 @@ export const homeContent = {
     ],
   },
   footer: {
-    title: "Let's Build Something Together",
+    title: "Contact Me",
     text: "Have a project in mind? I'm always open to discussing new opportunities and interesting projects.",
     cta: "Get in touch",
-    email: "mailto:hello@stelian.com",
+    email: "mailto:stelian.fedorca25@gmail.com",
+    socialLinks: {
+      linkedin: "https://www.linkedin.com/in/stelian-fedorca-08a4b7186/",
+      github: "https://github.com/stelianfedorca",
+    },
   },
 };
