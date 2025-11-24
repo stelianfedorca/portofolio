@@ -8,6 +8,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 import StyledComponentsRegistry from "@/lib/registry";
+import StickyHeader from "@/components/StickyHeader";
 
 export const metadata: Metadata = {
   title: "Stelian | Frontend Engineer",
@@ -22,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={plusJakartaSans.variable}>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <StickyHeader />
+          {children}
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import Image from "next/image";
+import { homeContent } from "@/content/home";
 
 const Container = styled.main`
   min-height: 100vh;
@@ -19,42 +20,11 @@ const MaxWidthWrapper = styled.div`
 // --- Header / Hero Section ---
 
 const Header = styled.header`
-  padding: 4rem 0 2rem;
+  padding: 2rem 0 2rem;
 
   @media (min-width: 768px) {
-    padding: 6rem 0 4rem;
+    padding: 2rem 0 4rem;
   }
-`;
-
-const TopNav = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4rem;
-`;
-
-const Logo = styled.div`
-  font-weight: 900;
-  font-size: 1.5rem;
-  letter-spacing: -1px;
-`;
-
-const SocialLinks = styled.div`
-  display: flex;
-  gap: 1.5rem;
-
-  a {
-    color: #666;
-    transition: color 0.2s;
-    &:hover {
-      color: #000;
-    }
-  }
-`;
-
-const Links = styled.nav`
-  display: flex;
-  gap: 1.5rem;
 `;
 
 const HeroContent = styled.div`
@@ -76,7 +46,7 @@ const ProfileImageWrapper = styled.div`
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 20px 20px 60px #e0e0e0, -20px -20px 60px #ffffff;
+  box-shadow: var(--box-shadow);
   margin: 2rem auto 0;
   margin-top: 16px;
 
@@ -100,13 +70,14 @@ const Greeting = styled.h1`
   line-height: 1.1;
   margin-bottom: 1rem;
   letter-spacing: -0.03em;
+  color: var(--text-primary);
 
   @media (min-width: 768px) {
     font-size: 4.5rem;
   }
 
   span {
-    color: var(--accent);
+    color: var(--accent2);
   }
 `;
 
@@ -116,6 +87,7 @@ const Subtitle = styled.h2`
   line-height: 1.1;
   letter-spacing: -0.03em;
   margin-bottom: 1.5rem;
+  color: var(--text-primary);
 
   span {
     position: relative;
@@ -141,7 +113,7 @@ const Subtitle = styled.h2`
 const IntroText = styled.p`
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #555;
+  color: var(--text-secondary);
   max-width: 600px;
   margin-top: 2rem;
 `;
@@ -153,7 +125,7 @@ const HeroImageContainer = styled.div`
   position: relative;
   border-radius: 2px;
   overflow: hidden;
-  background-color: #f5f5f5;
+  background-color: var(--bg-secondary);
 
   @media (min-width: 768px) {
     height: 600px;
@@ -190,7 +162,7 @@ const SkillsGrid = styled.div`
 const SkillItem = styled.div`
   font-size: 1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -232,7 +204,7 @@ const ProjectCard = styled.div`
 const ProjectImage = styled.div`
   width: 100%;
   aspect-ratio: 16/10;
-  background-color: #f0f0f0;
+  background-color: var(--bg-tertiary);
   position: relative;
   overflow: hidden;
   border-radius: 4px;
@@ -255,7 +227,7 @@ const ProjectTitle = styled.h4`
 
 const ProjectDesc = styled.p`
   font-size: 1rem;
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.5;
   margin: 0;
 `;
@@ -263,7 +235,7 @@ const ProjectDesc = styled.p`
 const ProjectLink = styled.span`
   font-size: 0.9rem;
   font-weight: 600;
-  color: #111;
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 4px;
 `;
@@ -272,7 +244,7 @@ const ProjectLink = styled.span`
 
 const Footer = styled.footer`
   padding: 6rem 0;
-  background-color: #fafafa;
+  background-color: var(--bg-secondary);
   margin-top: 4rem;
 `;
 
@@ -288,7 +260,7 @@ const FooterTitle = styled.h2`
 
 const FooterText = styled.p`
   font-size: 1.1rem;
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 2rem;
   max-width: 500px;
 `;
@@ -296,15 +268,15 @@ const FooterText = styled.p`
 const ContactButton = styled.a`
   display: inline-block;
   padding: 1rem 2rem;
-  background-color: #111;
-  color: #fff;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   font-weight: 600;
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: #333;
+    background-color: var(--text-secondary);
   }
 `;
 
@@ -313,28 +285,13 @@ export default function Home() {
     <Container>
       <MaxWidthWrapper>
         <Header>
-          <TopNav>
-            <Logo>SF.</Logo>
-            <Links>
-              <a href="#projects">Projects</a>
-              <a href="#contact">Contact</a>
-            </Links>
-          </TopNav>
-
           <HeroContent>
             <HeroText>
               <Greeting>
-                Hi there, I&apos;m <span>Stelian</span>
+                {homeContent.hero.greeting} <span>{homeContent.hero.name}</span>
               </Greeting>
-              <Subtitle>
-                Frontend <span>Engineer</span>
-              </Subtitle>
-              <IntroText>
-                I’m a frontend engineer based in Romania, turning ideas into
-                clean, performant web apps with React and Next.js. I care about
-                accessibility, smooth interactions, and the tiny details most
-                people only feel.
-              </IntroText>
+              <Subtitle>{homeContent.hero.role}</Subtitle>
+              <IntroText>{homeContent.hero.intro}</IntroText>
             </HeroText>
 
             <ProfileImageWrapper>
@@ -344,58 +301,37 @@ export default function Home() {
         </Header>
 
         <Section>
-          <SectionTitle>My Skills</SectionTitle>
+          <SectionTitle>{homeContent.skills.title}</SectionTitle>
           <SkillsGrid>
-            <SkillItem>React / Next.js</SkillItem>
-            <SkillItem>TypeScript</SkillItem>
-            <SkillItem>Styled Components</SkillItem>
-            <SkillItem>Node.js</SkillItem>
-            <SkillItem>UI/UX Design</SkillItem>
-            <SkillItem>Figma</SkillItem>
-            <SkillItem>GraphQL</SkillItem>
-            <SkillItem>Accessibility</SkillItem>
+            {homeContent.skills.items.map((skill) => (
+              <SkillItem key={skill}>{skill}</SkillItem>
+            ))}
           </SkillsGrid>
         </Section>
 
         <Section id="projects">
-          <SectionTitle>What I&apos;ve been working on</SectionTitle>
+          <SectionTitle>{homeContent.projects.title}</SectionTitle>
           <WorkGrid>
-            <ProjectCard>
-              <ProjectImage>
-                <Image src="/project1.png" alt="Project 1" fill />
-              </ProjectImage>
-              <ProjectTitle>Analytics Dashboard</ProjectTitle>
-              <ProjectDesc>
-                A modern analytics platform for tracking user engagement and
-                growth metrics.
-              </ProjectDesc>
-              <ProjectLink>View Project</ProjectLink>
-            </ProjectCard>
-
-            <ProjectCard>
-              <ProjectImage>
-                <Image src="/project2.png" alt="Project 2" fill />
-              </ProjectImage>
-              <ProjectTitle>Travel Companion App</ProjectTitle>
-              <ProjectDesc>
-                Mobile-first application helping travelers find the best local
-                spots and hidden gems.
-              </ProjectDesc>
-              <ProjectLink>View Project</ProjectLink>
-            </ProjectCard>
+            {homeContent.projects.items.map((project) => (
+              <ProjectCard key={project.title}>
+                <ProjectImage>
+                  <Image src={project.image} alt={project.title} fill />
+                </ProjectImage>
+                <ProjectTitle>{project.title}</ProjectTitle>
+                <ProjectDesc>{project.description}</ProjectDesc>
+                <ProjectLink>{project.link}</ProjectLink>
+              </ProjectCard>
+            ))}
           </WorkGrid>
         </Section>
       </MaxWidthWrapper>
 
       <Footer id="contact">
         <MaxWidthWrapper>
-          <FooterTitle>Let&apos;s Build Something Together</FooterTitle>
-          <FooterText>
-            Have a project in mind? I&apos;m always open to discussing new
-            opportunities and interesting projects.
-          </FooterText>
-          <ContactButton href="mailto:hello@stelian.com">
-            Get in touch
+          <FooterTitle>{homeContent.footer.title}</FooterTitle>
+          <FooterText>{homeContent.footer.text}</FooterText>
+          <ContactButton href={homeContent.footer.email}>
+            {homeContent.footer.cta}
           </ContactButton>
         </MaxWidthWrapper>
       </Footer>
