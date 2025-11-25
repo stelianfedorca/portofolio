@@ -42,7 +42,11 @@ body {
   scroll-behavior: smooth;
   line-height: 1.5;
 
-  padding-top: var(--header-height);
+  padding-top: calc(var(--header-height) - 35px);
+
+  @media (min-width: 768px) {
+    padding-top: var(--header-height);
+  }
   scroll-padding-top: var(--header-height); /* Fixes anchor link scrolling */
 }
 
