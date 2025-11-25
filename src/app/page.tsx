@@ -31,7 +31,7 @@ const Container = styled.main`
 `;
 
 const MaxWidthWrapper = styled.div`
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 1rem;
 
@@ -53,7 +53,7 @@ const Header = styled.header`
 const HeroContent = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  gap: 2rem;
+  gap: 1.5rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -98,7 +98,11 @@ const Greeting = styled.h1`
   color: var(--text-primary);
 
   @media (min-width: 768px) {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 4rem;
   }
 
   span {
@@ -120,7 +124,11 @@ const Subtitle = styled.h2`
   }
 
   @media (min-width: 768px) {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 4rem;
   }
 `;
 
