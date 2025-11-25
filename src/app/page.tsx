@@ -4,8 +4,25 @@ import styled from "styled-components";
 import Image from "next/image";
 import { homeContent } from "@/content/home";
 import Link from "next/link";
-import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaEnvelope,
+  FaReact,
+  FaNodeJs,
+  FaUniversalAccess,
+  FaGitAlt,
+  FaFigma,
+} from "react-icons/fa";
+import { FiExternalLink, FiPenTool, FiCode, FiCpu } from "react-icons/fi";
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiStyledcomponents,
+  SiRedux,
+  SiGraphql,
+} from "react-icons/si";
+import { JSX } from "react";
 
 const Container = styled.main`
   min-height: 100vh;
@@ -15,7 +32,11 @@ const Container = styled.main`
 const MaxWidthWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
 `;
 
 // --- Header / Hero Section ---
@@ -31,12 +52,13 @@ const Header = styled.header`
 const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 4rem;
   }
 `;
 
@@ -49,7 +71,7 @@ const ProfileImageWrapper = styled.div`
   overflow: hidden;
   box-shadow: var(--box-shadow);
   margin: 2rem auto 0;
-  margin-top: 16px;
+  margin-top: 1rem;
 
   @media (min-width: 768px) {
     /* margin: 4rem 0 0 0; */
@@ -66,7 +88,7 @@ const HeroText = styled.div`
 `;
 
 const Greeting = styled.h1`
-  font-size: 3rem;
+  font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1rem;
@@ -83,7 +105,7 @@ const Greeting = styled.h1`
 `;
 
 const Subtitle = styled.h2`
-  font-size: 3rem;
+  font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -132,39 +154,56 @@ const Section = styled.section`
   padding: 6rem 0;
 `;
 
+const SkillsSection = styled.section`
+  padding: 3rem 0;
+
+  @media (min-width: 768px) {
+    padding: 6rem 0;
+  }
+`;
+
 const SectionTitle = styled.h3`
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 `;
 
 const SkillsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 `;
 
 const SkillItem = styled.div`
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  transition: transform 0.2s ease;
+  cursor: default;
 
-  &::before {
-    content: "";
-    display: block;
-    width: 8px;
-    height: 8px;
-    background-color: #a5b4fc;
-    border-radius: 50%;
+  &:hover {
+    background-color: var(--bg-tertiary);
+    transform: translateY(-2px);
   }
+
+  @media (min-width: 768px) {
+    padding: 0.5rem 1.25rem;
+  }
+`;
+
+const SkillIconWrap = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  color: var(--accent2);
 `;
 
 // --- Work Section ---
@@ -229,6 +268,33 @@ const ProjectLink = styled.span`
   text-decoration: underline;
   text-underline-offset: 4px;
 `;
+
+type SkillIconKey =
+  | "typescript"
+  | "react"
+  | "nextjs"
+  | "htmlcss"
+  | "styledcomponents"
+  | "redux"
+  | "node"
+  | "graphql"
+  | "accessibility"
+  | "git";
+
+const skillIcons: Record<SkillIconKey, JSX.Element> = {
+  typescript: <SiTypescript />,
+  react: <FaReact />,
+  nextjs: <SiNextdotjs />,
+  htmlcss: <FiCode />,
+  styledcomponents: <SiStyledcomponents />,
+  redux: <SiRedux />,
+  node: <FaNodeJs />,
+  graphql: <SiGraphql />,
+  accessibility: <FaUniversalAccess />,
+  git: <FaGitAlt />,
+};
+
+type Skill = { label: string; icon: SkillIconKey };
 
 // --- Footer ---
 
@@ -343,14 +409,19 @@ export default function Home() {
           </HeroContent>
         </Header>
 
-        <Section>
+        <SkillsSection>
           <SectionTitle>{homeContent.skills.title}</SectionTitle>
           <SkillsGrid>
-            {homeContent.skills.items.map((skill) => (
-              <SkillItem key={skill}>{skill}</SkillItem>
+            {(homeContent.skills.items as Skill[]).map((skill) => (
+              <SkillItem key={skill.label}>
+                <SkillIconWrap aria-hidden="true">
+                  {skillIcons[skill.icon] ?? ""}
+                </SkillIconWrap>
+                {skill.label}
+              </SkillItem>
             ))}
           </SkillsGrid>
-        </Section>
+        </SkillsSection>
 
         <Section id="projects">
           <SectionTitle>{homeContent.projects.title}</SectionTitle>

@@ -3,6 +3,8 @@
 import styled from "styled-components";
 import Link from "next/link";
 
+import ThemeToggle from "./ThemeToggle";
+
 const StickyHeaderWrapper = styled.div`
   position: fixed;
   top: 0;
@@ -25,7 +27,7 @@ const MaxWidthWrapper = styled.div`
 const TopNav = styled.nav`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 `;
 
 const BrandName = styled(Link)`
@@ -38,7 +40,8 @@ const BrandName = styled(Link)`
 
 const NavigationLinks = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  align-items: center;
 
   a {
     text-transform: uppercase;
@@ -67,11 +70,20 @@ const NavigationLinks = styled.div`
   }
 `;
 
+const NavActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
 export default function StickyHeader() {
   function scrollToTop(event: React.MouseEvent) {
     event.preventDefault();
 
     window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Remove hash from URL
+    window.history.pushState(null, "", window.location.pathname);
   }
 
   return (
@@ -81,10 +93,13 @@ export default function StickyHeader() {
           <BrandName href="/" onClick={scrollToTop}>
             Stelian Fedorca
           </BrandName>
-          <NavigationLinks>
-            <a href="/#projects">Projects</a>
-            <a href="/#contact">Contact</a>
-          </NavigationLinks>
+          <NavActions>
+            <NavigationLinks>
+              <a href="/#projects">Projects</a>
+              <a href="/#contact">Contact</a>
+            </NavigationLinks>
+            <ThemeToggle />
+          </NavActions>
         </TopNav>
       </MaxWidthWrapper>
     </StickyHeaderWrapper>
