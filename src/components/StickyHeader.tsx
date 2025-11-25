@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoClose, IoMenu } from "react-icons/io5";
 import ThemeToggle from "./ThemeToggle";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 // --- Styled Components ---
 
@@ -145,6 +146,17 @@ const MobileLink = styled(motion.a)`
 
 export default function StickyHeader() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Close menu when clicking outside
+  useClickOutside(menuRef, (event) => {
+    // Don't close if clicking the menu button (it has its own toggle)
+    if (menuButtonRef.current?.contains(event.target as Node)) {
+      return;
+    }
+    setIsOpen(false);
+  });
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -224,7 +236,11 @@ export default function StickyHeader() {
         {/* Mobile Actions */}
         <MobileActions>
           <ThemeToggle />
-          <MenuButton onClick={toggleMenu} aria-label="Toggle menu">
+          <MenuButton
+            ref={menuButtonRef}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
             {isOpen ? <IoClose /> : <IoMenu />}
           </MenuButton>
         </MobileActions>
@@ -234,6 +250,7 @@ export default function StickyHeader() {
       <AnimatePresence>
         {isOpen && (
           <Overlay
+            ref={menuRef}
             initial="closed"
             animate="open"
             exit="closed"
