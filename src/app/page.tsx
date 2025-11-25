@@ -4,8 +4,25 @@ import styled from "styled-components";
 import Image from "next/image";
 import { homeContent } from "@/content/home";
 import Link from "next/link";
-import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaEnvelope,
+  FaReact,
+  FaNodeJs,
+  FaUniversalAccess,
+  FaGitAlt,
+  FaFigma,
+} from "react-icons/fa";
+import { FiExternalLink, FiPenTool, FiCode, FiCpu } from "react-icons/fi";
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiStyledcomponents,
+  SiRedux,
+  SiGraphql,
+} from "react-icons/si";
+import { JSX } from "react";
 
 const Container = styled.main`
   min-height: 100vh;
@@ -159,6 +176,9 @@ const SkillsGrid = styled.div`
 `;
 
 const SkillItem = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--text-primary);
@@ -176,6 +196,14 @@ const SkillItem = styled.div`
   @media (min-width: 768px) {
     padding: 0.5rem 1.25rem;
   }
+`;
+
+const SkillIconWrap = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  color: var(--accent2);
 `;
 
 // --- Work Section ---
@@ -240,6 +268,33 @@ const ProjectLink = styled.span`
   text-decoration: underline;
   text-underline-offset: 4px;
 `;
+
+type SkillIconKey =
+  | "typescript"
+  | "react"
+  | "nextjs"
+  | "htmlcss"
+  | "styledcomponents"
+  | "redux"
+  | "node"
+  | "graphql"
+  | "accessibility"
+  | "git";
+
+const skillIcons: Record<SkillIconKey, JSX.Element> = {
+  typescript: <SiTypescript />,
+  react: <FaReact />,
+  nextjs: <SiNextdotjs />,
+  htmlcss: <FiCode />,
+  styledcomponents: <SiStyledcomponents />,
+  redux: <SiRedux />,
+  node: <FaNodeJs />,
+  graphql: <SiGraphql />,
+  accessibility: <FaUniversalAccess />,
+  git: <FaGitAlt />,
+};
+
+type Skill = { label: string; icon: SkillIconKey };
 
 // --- Footer ---
 
@@ -357,8 +412,13 @@ export default function Home() {
         <SkillsSection>
           <SectionTitle>{homeContent.skills.title}</SectionTitle>
           <SkillsGrid>
-            {homeContent.skills.items.map((skill) => (
-              <SkillItem key={skill}>{skill}</SkillItem>
+            {(homeContent.skills.items as Skill[]).map((skill) => (
+              <SkillItem key={skill.label}>
+                <SkillIconWrap aria-hidden="true">
+                  {skillIcons[skill.icon] ?? ""}
+                </SkillIconWrap>
+                {skill.label}
+              </SkillItem>
             ))}
           </SkillsGrid>
         </SkillsSection>
