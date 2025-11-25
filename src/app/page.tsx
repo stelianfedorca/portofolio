@@ -15,7 +15,11 @@ const Container = styled.main`
 const MaxWidthWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
 `;
 
 // --- Header / Hero Section ---
@@ -31,12 +35,13 @@ const Header = styled.header`
 const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 4rem;
   }
 `;
 
@@ -49,7 +54,7 @@ const ProfileImageWrapper = styled.div`
   overflow: hidden;
   box-shadow: var(--box-shadow);
   margin: 2rem auto 0;
-  margin-top: 16px;
+  margin-top: 1rem;
 
   @media (min-width: 768px) {
     /* margin: 4rem 0 0 0; */
@@ -66,7 +71,7 @@ const HeroText = styled.div`
 `;
 
 const Greeting = styled.h1`
-  font-size: 3rem;
+  font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1rem;
@@ -83,7 +88,7 @@ const Greeting = styled.h1`
 `;
 
 const Subtitle = styled.h2`
-  font-size: 3rem;
+  font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -132,14 +137,18 @@ const Section = styled.section`
   padding: 6rem 0;
 `;
 
-const SkillSection = styled.section`
-  padding: 4rem 0;
+const SkillsSection = styled.section`
+  padding: 3rem 0;
+
+  @media (min-width: 768px) {
+    padding: 6rem 0;
+  }
 `;
 
 const SectionTitle = styled.h3`
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 `;
 
@@ -154,7 +163,7 @@ const SkillItem = styled.div`
   font-weight: 500;
   color: var(--text-primary);
   background-color: var(--bg-secondary);
-  padding: 0.5rem 1.25rem;
+  padding: 0.5rem 1rem;
   border-radius: 9999px;
   transition: transform 0.2s ease;
   cursor: default;
@@ -162,6 +171,10 @@ const SkillItem = styled.div`
   &:hover {
     background-color: var(--bg-tertiary);
     transform: translateY(-2px);
+  }
+
+  @media (min-width: 768px) {
+    padding: 0.5rem 1.25rem;
   }
 `;
 
@@ -341,14 +354,14 @@ export default function Home() {
           </HeroContent>
         </Header>
 
-        <SkillSection>
+        <SkillsSection>
           <SectionTitle>{homeContent.skills.title}</SectionTitle>
           <SkillsGrid>
             {homeContent.skills.items.map((skill) => (
               <SkillItem key={skill}>{skill}</SkillItem>
             ))}
           </SkillsGrid>
-        </SkillSection>
+        </SkillsSection>
 
         <Section id="projects">
           <SectionTitle>{homeContent.projects.title}</SectionTitle>
