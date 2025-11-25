@@ -195,7 +195,8 @@ const Section = styled.section`
 `;
 
 const SkillsSection = styled.section`
-  padding: 3rem 0;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 
   @media (min-width: 768px) {
     padding: 6rem 0;

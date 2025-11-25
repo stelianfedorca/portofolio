@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { IoClose, IoMenu } from "react-icons/io5";
 import ThemeToggle from "./ThemeToggle";
 
 // --- Styled Components ---
@@ -88,45 +88,58 @@ const MenuButton = styled.button`
   border: none;
   color: var(--text-primary);
   font-size: 1.5rem;
+  font-weight: 300;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 102;
 
-  svg {
+  /* svg {
     transform: scaleY(0.8);
-  }
+  } */
 `;
 
 // --- Mobile Overlay ---
 
 const Overlay = styled(motion.div)`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: var(--background);
+  top: 5rem;
+  right: 1rem;
+  width: auto;
+  min-width: 200px;
+  background: color-mix(in srgb, var(--background), transparent 5%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
   z-index: 101;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
+  padding: 1rem;
   pointer-events: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  @media (min-width: 768px) {
+    right: 2rem;
+  }
 `;
 
 const MobileLink = styled(motion.a)`
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--text-primary);
-  margin: 1rem 0;
+  padding: 0.75rem 1rem;
   text-decoration: none;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
 
   &:hover {
-    color: var(--accent2);
+    background: color-mix(in srgb, var(--text-primary), transparent 90%);
+    color: var(--text-primary);
   }
 `;
 
@@ -159,18 +172,20 @@ export default function StickyHeader() {
   const menuVariants = {
     closed: {
       opacity: 0,
-      y: "-100%",
+      scale: 0.95,
+      y: -10,
       transition: {
-        duration: 0.5,
-        ease: [0.76, 0, 0.24, 1] as const,
+        duration: 0.2,
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
     open: {
       opacity: 1,
+      scale: 1,
       y: 0,
       transition: {
-        duration: 0.5,
-        ease: [0.76, 0, 0.24, 1] as const,
+        duration: 0.3,
+        ease: [0.22, 1, 0.36, 1] as const,
       },
     },
   };
@@ -210,12 +225,12 @@ export default function StickyHeader() {
         <MobileActions>
           <ThemeToggle />
           <MenuButton onClick={toggleMenu} aria-label="Toggle menu">
-            {isOpen ? <FaTimes /> : <FaBars />}
+            {isOpen ? <IoClose /> : <IoMenu />}
           </MenuButton>
         </MobileActions>
       </FloatingBar>
 
-      {/* Mobile Full Screen Menu */}
+      {/* Mobile Dropdown Menu */}
       <AnimatePresence>
         {isOpen && (
           <Overlay
@@ -224,20 +239,10 @@ export default function StickyHeader() {
             exit="closed"
             variants={menuVariants}
           >
-            <MobileLink
-              href="#projects"
-              onClick={closeMenu}
-              custom={0}
-              variants={linkVariants}
-            >
+            <MobileLink href="#projects" onClick={closeMenu}>
               Projects
             </MobileLink>
-            <MobileLink
-              href="#contact"
-              onClick={closeMenu}
-              custom={1}
-              variants={linkVariants}
-            >
+            <MobileLink href="#contact" onClick={closeMenu}>
               Contact
             </MobileLink>
           </Overlay>
