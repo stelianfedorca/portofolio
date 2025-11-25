@@ -13,6 +13,7 @@ import {
   FaUniversalAccess,
   FaGitAlt,
   FaFigma,
+  FaArrowDown,
 } from "react-icons/fa";
 import { FiExternalLink, FiPenTool, FiCode, FiCpu } from "react-icons/fi";
 import {
@@ -42,7 +43,7 @@ const MaxWidthWrapper = styled.div`
 // --- Header / Hero Section ---
 
 const Header = styled.header`
-  padding: 2rem 0 2rem;
+  /* padding: 2rem 0; */
 
   @media (min-width: 768px) {
     padding: 2rem 0 4rem;
@@ -51,7 +52,7 @@ const Header = styled.header`
 
 const HeroContent = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 2rem;
 
   @media (min-width: 768px) {
@@ -69,9 +70,10 @@ const ProfileImageWrapper = styled.div`
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
+  border-radius: 50%;
+  overflow: hidden;
   box-shadow: var(--box-shadow);
-  margin: 2rem auto 0;
-  margin-top: 1rem;
+  margin: 0 auto 2rem;
 
   @media (min-width: 768px) {
     /* margin: 4rem 0 0 0; */
@@ -130,6 +132,44 @@ const IntroText = styled.p`
   margin-top: 2rem;
 `;
 
+const HeroButton = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: color-mix(in srgb, var(--text-primary), transparent 92%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 2.5rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
+
+  svg {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover {
+    background: var(--text-primary);
+    color: var(--background);
+    border-color: var(--text-primary);
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.15);
+  }
+
+  &:hover svg {
+    transform: translateY(3px);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+`;
+
 const HeroImageContainer = styled.div`
   margin-top: 4rem;
   width: 100%;
@@ -155,7 +195,8 @@ const Section = styled.section`
 `;
 
 const SkillsSection = styled.section`
-  padding: 3rem 0;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 
   @media (min-width: 768px) {
     padding: 6rem 0;
@@ -401,6 +442,10 @@ export default function Home() {
               </Greeting>
               <Subtitle>{homeContent.hero.role}</Subtitle>
               <IntroText>{homeContent.hero.intro}</IntroText>
+              <HeroButton href="#projects">
+                View My Projects
+                <FaArrowDown size={16} />
+              </HeroButton>
             </HeroText>
 
             <ProfileImageWrapper>
