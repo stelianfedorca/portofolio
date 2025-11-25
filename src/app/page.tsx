@@ -136,34 +136,37 @@ const HeroButton = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  background-color: transparent;
+  background: color-mix(in srgb, var(--text-primary), transparent 92%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: var(--text-primary);
-  border: 2px solid var(--text-primary);
-  padding: 0.9rem 2rem;
-  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  border-radius: 9999px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-top: 2.5rem;
-  transition: all 0.2s ease;
-  box-shadow: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
 
   svg {
-    transition: transform 0.2s ease;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &:hover {
-    background-color: var(--text-primary);
+    background: var(--text-primary);
     color: var(--background);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--text-primary);
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.15);
   }
 
   &:hover svg {
-    transform: translateY(2px);
+    transform: translateY(3px);
   }
 
   &:active {
-    transform: translateY(0);
+    transform: scale(0.98);
   }
 `;
 
