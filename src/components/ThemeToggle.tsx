@@ -20,11 +20,11 @@ const ToggleButton = styled.button`
 
   &:hover {
     background: var(--bg-tertiary);
-    transform: translateY(-1px);
+    transform: scale(1.05);
   }
 
   &:active {
-    transform: translateY(0);
+    transform: scale(0.95);
   }
 
   svg {

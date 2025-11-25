@@ -21,7 +21,11 @@ const StickyHeaderWrapper = styled.div`
 const MaxWidthWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
+
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
 `;
 
 const TopNav = styled.nav`
@@ -31,7 +35,7 @@ const TopNav = styled.nav`
 `;
 
 const BrandName = styled(Link)`
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.5rem;
   letter-spacing: -1px;
 
@@ -44,10 +48,10 @@ const NavigationLinks = styled.div`
   align-items: center;
 
   a {
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: 600;
     position: relative;
-    letter-spacing: 0.05em;
+    /* letter-spacing: 0.05em; */
 
     &:hover {
       color: var(--accent2);
@@ -73,7 +77,11 @@ const NavigationLinks = styled.div`
 const NavActions = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+
+  @media (min-width: 768px) {
+    gap: 1rem;
+  }
 `;
 
 export default function StickyHeader() {
@@ -95,7 +103,7 @@ export default function StickyHeader() {
           </BrandName>
           <NavActions>
             <NavigationLinks>
-              <a href="/#projects">Projects</a>
+              {/* <a href="/#projects">Projects</a> */}
               <a href="/#contact">Contact</a>
             </NavigationLinks>
             <ThemeToggle />

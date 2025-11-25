@@ -64,8 +64,8 @@ body {
 *,
 *:before,
 *:after {
-  transition: background-color 200ms ease, color 200ms ease,
-    border-color 220ms ease;
+  transition: background-color 100ms ease, color 100ms ease,
+    border-color 100ms ease;
 }
 
 a {

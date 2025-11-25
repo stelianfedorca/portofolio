@@ -13,6 +13,7 @@ import {
   FaUniversalAccess,
   FaGitAlt,
   FaFigma,
+  FaArrowDown,
 } from "react-icons/fa";
 import { FiExternalLink, FiPenTool, FiCode, FiCpu } from "react-icons/fi";
 import {
@@ -42,7 +43,7 @@ const MaxWidthWrapper = styled.div`
 // --- Header / Hero Section ---
 
 const Header = styled.header`
-  padding: 2rem 0 2rem;
+  /* padding: 2rem 0; */
 
   @media (min-width: 768px) {
     padding: 2rem 0 4rem;
@@ -51,7 +52,7 @@ const Header = styled.header`
 
 const HeroContent = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 2rem;
 
   @media (min-width: 768px) {
@@ -69,9 +70,10 @@ const ProfileImageWrapper = styled.div`
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
+  border-radius: 50%;
+  overflow: hidden;
   box-shadow: var(--box-shadow);
-  margin: 2rem auto 0;
-  margin-top: 1rem;
+  margin: 0 auto 2rem;
 
   @media (min-width: 768px) {
     /* margin: 4rem 0 0 0; */
@@ -128,6 +130,41 @@ const IntroText = styled.p`
   color: var(--text-secondary);
   max-width: 600px;
   margin-top: 2rem;
+`;
+
+const HeroButton = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--text-primary);
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 2.5rem;
+  transition: all 0.2s ease;
+  box-shadow: none;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    background-color: var(--text-primary);
+    color: var(--background);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &:hover svg {
+    transform: translateY(2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 `;
 
 const HeroImageContainer = styled.div`
@@ -401,6 +438,10 @@ export default function Home() {
               </Greeting>
               <Subtitle>{homeContent.hero.role}</Subtitle>
               <IntroText>{homeContent.hero.intro}</IntroText>
+              <HeroButton href="#projects">
+                View My Projects
+                <FaArrowDown size={16} />
+              </HeroButton>
             </HeroText>
 
             <ProfileImageWrapper>
