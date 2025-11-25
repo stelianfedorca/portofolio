@@ -28,7 +28,7 @@ const FloatingBar = styled(motion.div)`
   max-width: 1000px;
   margin: 0 auto;
   background: color-mix(in srgb, var(--background), transparent 20%);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-color);
   border-radius: 9999px;
@@ -93,6 +93,10 @@ const MenuButton = styled.button`
   align-items: center;
   justify-content: center;
   z-index: 102;
+
+  svg {
+    transform: scaleY(0.8);
+  }
 `;
 
 // --- Mobile Overlay ---
