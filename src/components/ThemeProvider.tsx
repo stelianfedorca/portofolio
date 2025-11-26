@@ -11,6 +11,9 @@ import {
 
 type Theme = "light" | "dark";
 
+/*
+    setTheme is not used anywhere, I can remove it
+*/
 type ThemeContextValue = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
@@ -69,6 +72,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
+  /*
+    setTheme is not used anywhere, I can remove it
+  */
   const setTheme = useCallback((nextTheme: Theme) => {
     window.localStorage.setItem(STORAGE_KEY, nextTheme);
     setThemeState(nextTheme);
@@ -76,9 +82,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "light" ? "dark" : "light");
-  }, [theme, setTheme]);
+    setThemeState((prevTheme) => {
+      const nextTheme = prevTheme === "light" ? "dark" : "light";
+      window.localStorage.setItem(STORAGE_KEY, nextTheme);
+      applyTheme(nextTheme);
+      return nextTheme;
+    });
+  }, []);
 
+  /*
+    setTheme is not used anywhere, I can remove it
+  */
   const value = useMemo(
     () => ({ theme, setTheme, toggleTheme }),
     [theme, setTheme, toggleTheme]
