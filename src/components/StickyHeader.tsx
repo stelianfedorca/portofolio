@@ -27,6 +27,9 @@ const FloatingBar = styled(motion.div)`
   /* border-bottom: 1px solid var(--border-color);
   box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1); */
   pointer-events: auto; /* Re-enable clicks on the bar */
+
+  transition: background-color var(--theme-duration) var(--theme-ease),
+    border-color var(--theme-duration) var(--theme-ease);
 `;
 
 const InnerContainer = styled.div`
