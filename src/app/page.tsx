@@ -23,7 +23,71 @@ import {
   SiRedux,
   SiGraphql,
 } from "react-icons/si";
-import { JSX } from "react";
+import { TbBrandFramerMotion } from "react-icons/tb";
+import React, { JSX, useRef } from "react";
+import { inView, motion, useInView, type Variants } from "framer-motion";
+
+/*
+  Definining animation variants
+*/
+
+const heroTextVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const heroImageVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: 0 },
+  },
+};
+
+const sectionVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+function AnimatedRevealSection({
+  children,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={sectionVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      transition={{ duration: 0.6, ease: "easeOut", delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/** */
 
 const Container = styled.main`
   min-height: 100vh;
@@ -50,7 +114,7 @@ const Header = styled.header`
   }
 `;
 
-const HeroContent = styled.div`
+const HeroContent = styled(motion.div)`
   display: flex;
   flex-direction: column-reverse;
   gap: 1.5rem;
@@ -74,18 +138,22 @@ const ProfileImageWrapper = styled.div`
   overflow: hidden;
   box-shadow: var(--box-shadow);
   margin: 0 auto 2rem;
+  transition: transform 200ms ease-in-out;
 
   @media (min-width: 768px) {
-    /* margin: 4rem 0 0 0; */
     width: 320px;
   }
 
   img {
     object-fit: cover;
   }
+
+  &:hover {
+    transform: scale(1.03);
+  }
 `;
 
-const HeroText = styled.div`
+const HeroText = styled(motion.div)`
   max-width: 800px;
 `;
 
@@ -322,6 +390,7 @@ type SkillIconKey =
   | "typescript"
   | "react"
   | "nextjs"
+  | "framermotion"
   | "htmlcss"
   | "styledcomponents"
   | "redux"
@@ -334,6 +403,7 @@ const skillIcons: Record<SkillIconKey, JSX.Element> = {
   typescript: <SiTypescript />,
   react: <FaReact />,
   nextjs: <SiNextdotjs />,
+  framermotion: <TbBrandFramerMotion />,
   htmlcss: <FiCode />,
   styledcomponents: <SiStyledcomponents />,
   redux: <SiRedux />,
@@ -444,53 +514,70 @@ export default function Home() {
       <MaxWidthWrapper>
         <Header>
           <HeroContent>
-            <HeroText>
-              <Greeting>
-                {homeContent.hero.greeting} <span>{homeContent.hero.name}</span>
-              </Greeting>
-              <Subtitle>{homeContent.hero.role}</Subtitle>
-              <IntroText>{homeContent.hero.intro}</IntroText>
-              <HeroButton href="#projects">
-                View My Projects
-                <FaArrowDown size={16} />
-              </HeroButton>
-            </HeroText>
+            <motion.div
+              variants={heroTextVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <HeroText>
+                <Greeting>
+                  {homeContent.hero.greeting}{" "}
+                  <span>{homeContent.hero.name}</span>
+                </Greeting>
+                <Subtitle>{homeContent.hero.role}</Subtitle>
+                <IntroText>{homeContent.hero.intro}</IntroText>
+                <HeroButton href="#projects">
+                  View My Projects
+                  <FaArrowDown size={16} />
+                </HeroButton>
+              </HeroText>
+            </motion.div>
 
-            <ProfileImageWrapper>
-              <Image src="/Me.jpeg" alt="Stelian" fill priority />
-            </ProfileImageWrapper>
+            <motion.div
+              variants={heroImageVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <ProfileImageWrapper>
+                <Image src="/Me.jpeg" alt="Stelian" fill priority />
+              </ProfileImageWrapper>
+            </motion.div>
           </HeroContent>
         </Header>
 
-        <SkillsSection>
-          <SectionTitle>{homeContent.skills.title}</SectionTitle>
-          <SkillsGrid>
-            {(homeContent.skills.items as Skill[]).map((skill) => (
-              <SkillItem key={skill.label}>
-                <SkillIconWrap aria-hidden="true">
-                  {skillIcons[skill.icon] ?? ""}
-                </SkillIconWrap>
-                {skill.label}
-              </SkillItem>
-            ))}
-          </SkillsGrid>
-        </SkillsSection>
+        <AnimatedRevealSection delay={0.1}>
+          <SkillsSection>
+            <SectionTitle>{homeContent.skills.title}</SectionTitle>
+            <SkillsGrid>
+              {(homeContent.skills.items as Skill[]).map((skill) => (
+                <SkillItem key={skill.label}>
+                  <SkillIconWrap aria-hidden="true">
+                    {skillIcons[skill.icon] ?? ""}
+                  </SkillIconWrap>
+                  {skill.label}
+                </SkillItem>
+              ))}
+            </SkillsGrid>
+          </SkillsSection>
+        </AnimatedRevealSection>
 
-        <Section id="projects">
-          <SectionTitle>{homeContent.projects.title}</SectionTitle>
-          <WorkGrid>
-            {homeContent.projects.items.map((project) => (
-              <ProjectCard key={project.title}>
-                <ProjectImage>
-                  <Image src={project.image} alt={project.title} fill />
-                </ProjectImage>
-                <ProjectTitle>{project.title}</ProjectTitle>
-                <ProjectDesc>{project.description}</ProjectDesc>
-                <ProjectLink>{project.link}</ProjectLink>
-              </ProjectCard>
-            ))}
-          </WorkGrid>
-        </Section>
+        <AnimatedRevealSection delay={0.2}>
+          <Section id="projects">
+            <SectionTitle>{homeContent.projects.title}</SectionTitle>
+            <WorkGrid>
+              {homeContent.projects.items.map((project) => (
+                <ProjectCard key={project.title}>
+                  <ProjectImage>
+                    <Image src={project.image} alt={project.title} fill />
+                  </ProjectImage>
+                  <ProjectTitle>{project.title}</ProjectTitle>
+                  <ProjectDesc>{project.description}</ProjectDesc>
+                  <ProjectLink>{project.link}</ProjectLink>
+                </ProjectCard>
+              ))}
+            </WorkGrid>
+          </Section>
+        </AnimatedRevealSection>
       </MaxWidthWrapper>
 
       <Footer id="contact">

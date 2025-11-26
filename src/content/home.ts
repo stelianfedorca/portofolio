@@ -11,6 +11,7 @@ export const homeContent = {
     items: [
       { label: "JavaScript / TypeScript", icon: "typescript" },
       { label: "React", icon: "react" },
+      { label: "Framer Motion", icon: "framermotion" },
       { label: "Next.js", icon: "nextjs" },
       { label: "HTML & CSS", icon: "htmlcss" },
       { label: "Styled Components", icon: "styledcomponents" },
