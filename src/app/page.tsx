@@ -47,24 +47,26 @@ const heroTextVariants: Variants = {
 const heroChildVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 20,
+    y: 10, // Reduced from 20
   },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.4, ease: "easeOut" }, // Slightly faster
   },
 };
 
 const heroImageVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 16,
+    y: 10, // Reduced from 16
+    scale: 0.98, // Added subtle scale
   },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: 0 },
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 

@@ -1,5 +1,7 @@
 :root {
   --header-height: 100px;
+  --theme-duration: 300ms;
+  --theme-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 :root,
@@ -55,21 +57,12 @@ body {
   font-family: var(--font-plus-jakarta-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  transition: background-color 200ms ease, color 200ms ease;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
-
-*,
-*:before,
-*:after {
-  transition: background-color 100ms ease, color 100ms ease,
-    border-color 100ms ease;
 }
 
 a {
@@ -96,5 +89,24 @@ h6 {
   *:before,
   *:after {
     transition: none;
+  }
+}
+
+/* Smooth Theme Transition - Only text and background elements */
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  a,
+  button {
+    transition: background-color var(--theme-duration) var(--theme-ease),
+      color var(--theme-duration) var(--theme-ease),
+      border-color var(--theme-duration) var(--theme-ease);
   }
 }
