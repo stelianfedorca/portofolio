@@ -1,25 +1,38 @@
 "use client";
 
 import styled from "styled-components";
-import { FiMoon, FiSun } from "react-icons/fi";
+import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
 
 import { useTheme } from "./ThemeProvider";
 
 const ToggleButton = styled.button`
+  position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.35rem 0.75rem;
   border-radius: 9999px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  /* border: 1px solid var(--border-color); */
+  border: 0;
+  background: none;
   color: var(--text-primary);
-  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
 
+  &::after {
+    --click-target-minimum: 44px;
+    --inset-by: min(0px, calc((100% - var(--click-target-minimum)) / 2));
+
+    content: "";
+    position: absolute;
+    top: var(--inset-by);
+    left: var(--inset-by);
+    right: var(--inset-by);
+    bottom: var(--inset-by);
+  }
+
   &:hover {
-    background: var(--bg-tertiary);
+    /* background: var(--bg-tertiary); */
     transform: scale(1.05);
   }
 
@@ -46,7 +59,7 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
     >
-      {isLight ? <FiSun /> : <FiMoon />}
+      {isLight ? <IoSunnyOutline size={20} /> : <IoMoonOutline size={20} />}
     </ToggleButton>
   );
 }
