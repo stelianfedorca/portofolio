@@ -34,12 +34,25 @@ import { inView, motion, useInView, type Variants } from "framer-motion";
 const heroTextVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const heroChildVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
   },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -157,7 +170,7 @@ const HeroText = styled(motion.div)`
   max-width: 800px;
 `;
 
-const Greeting = styled.h1`
+const Greeting = styled(motion.h1)`
   font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.1;
@@ -178,7 +191,7 @@ const Greeting = styled.h1`
   }
 `;
 
-const Subtitle = styled.h2`
+const Subtitle = styled(motion.h2)`
   font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.1;
@@ -200,7 +213,7 @@ const Subtitle = styled.h2`
   }
 `;
 
-const IntroText = styled.p`
+const IntroText = styled(motion.p)`
   font-size: 1.1rem;
   line-height: 1.6;
   color: var(--text-secondary);
@@ -520,16 +533,22 @@ export default function Home() {
               animate="visible"
             >
               <HeroText>
-                <Greeting>
+                <Greeting variants={heroChildVariants}>
                   {homeContent.hero.greeting}{" "}
                   <span>{homeContent.hero.name}</span>
                 </Greeting>
-                <Subtitle>{homeContent.hero.role}</Subtitle>
-                <IntroText>{homeContent.hero.intro}</IntroText>
-                <HeroButton href="#projects">
-                  View My Projects
-                  <FaArrowDown size={16} />
-                </HeroButton>
+                <Subtitle variants={heroChildVariants}>
+                  {homeContent.hero.role}
+                </Subtitle>
+                <IntroText variants={heroChildVariants}>
+                  {homeContent.hero.intro}
+                </IntroText>
+                <motion.div variants={heroChildVariants}>
+                  <HeroButton href="#projects">
+                    View My Projects
+                    <FaArrowDown size={16} />
+                  </HeroButton>
+                </motion.div>
               </HeroText>
             </motion.div>
 

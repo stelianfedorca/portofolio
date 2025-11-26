@@ -218,9 +218,9 @@ export default function StickyHeader() {
   return (
     <HeaderContainer>
       <FloatingBar
-      // initial={{ y: -100, opacity: 0 }}
-      // animate={{ y: 0, opacity: 1 }}
-      // transition={{ duration: 0.6, ease: "easeOut" }}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
       >
         <BrandName href="/" onClick={scrollToTop}>
           Stelian Fedorca
