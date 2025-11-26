@@ -3,6 +3,7 @@
 import styled from "styled-components";
 import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
 import { PiSunBold, PiMoonBold } from "react-icons/pi";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { useTheme } from "./ThemeProvider";
 
@@ -18,7 +19,7 @@ const ToggleButton = styled.button`
   background: none;
   color: var(--text-primary);
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: transform 0.2s ease;
 
   &::after {
     --click-target-minimum: 44px;
@@ -50,17 +51,35 @@ const ToggleLabel = styled.span`
   font-size: 0.9rem;
 `;
 
+const IconWrap = styled(motion.span)`
+  display: inline-flex;
+  font-size: 22px;
+  @media (min-width: 768px) {
+    font-size: 26px;
+  }
+
+  svg {
+    font-size: 1.1rem;
+  }
+`;
+
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
   const isLight = theme === "light";
 
   return (
-    <ToggleButton
-      type="button"
-      onClick={toggleTheme}
-      aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
-    >
-      {isLight ? <PiSunBold size={20} /> : <PiMoonBold size={20} />}
+    <ToggleButton onClick={toggleTheme}>
+      <AnimatePresence mode="wait" initial={false}>
+        <IconWrap
+          key={isLight ? "sun" : "moon"}
+          initial={{ opacity: 0, rotate: -20, scale: 0.9 }}
+          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+          exit={{ opacity: 0, rotate: 20, scale: 0.9 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {isLight ? <PiSunBold /> : <PiMoonBold />}
+        </IconWrap>
+      </AnimatePresence>
     </ToggleButton>
   );
 }
