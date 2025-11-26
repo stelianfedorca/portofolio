@@ -2,6 +2,7 @@
 
 import styled from "styled-components";
 import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
+import { PiSunBold, PiMoonBold } from "react-icons/pi";
 
 import { useTheme } from "./ThemeProvider";
 
@@ -59,7 +60,7 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
     >
-      {isLight ? <IoSunnyOutline size={20} /> : <IoMoonOutline size={20} />}
+      {isLight ? <PiSunBold size={20} /> : <PiMoonBold size={20} />}
     </ToggleButton>
   );
 }

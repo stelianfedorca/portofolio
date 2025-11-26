@@ -83,7 +83,7 @@ const BrandName = styled(Link)`
 const DesktopNav = styled.nav`
   display: none;
   align-items: center;
-  gap: 2rem;
+  gap: 1.25rem;
 
   @media (min-width: 768px) {
     display: flex;
@@ -91,13 +91,16 @@ const DesktopNav = styled.nav`
 `;
 
 const NavLink = styled(Link)`
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-secondary);
-  transition: color 0.2s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
 
   &:hover {
     color: var(--text-primary);
+    background: rgb(from var(--text-primary) r g b / 0.06);
   }
 `;
 
@@ -263,8 +266,10 @@ export default function StickyHeader() {
 
           {/* Desktop Navigation */}
           <DesktopNav>
-            <NavLink href="#projects">Projects</NavLink>
-            <NavLink href="#contact">Contact</NavLink>
+            <div>
+              <NavLink href="#projects">Projects</NavLink>
+              <NavLink href="#contact">Contact</NavLink>
+            </div>
             <ThemeToggle />
           </DesktopNav>
 
