@@ -21,9 +21,9 @@ const HeaderContainer = styled.header`
 
 const FloatingBar = styled(motion.div)`
   width: 100%;
-  background: color-mix(in srgb, var(--background), transparent 20%);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgb(from var(--background) r g b / 0.8);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
   /* border-bottom: 1px solid var(--border-color);
   box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.1); */
   pointer-events: auto; /* Re-enable clicks on the bar */
@@ -32,15 +32,40 @@ const FloatingBar = styled(motion.div)`
 const InnerContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 
   @media (min-width: 768px) {
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
   }
+`;
+
+const Backdrop = styled.div`
+  height: 200%;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0% 50%,
+    transparent 50% 100%
+  );
+  mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);
+
+  height: 100%;
+  inset: 0;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0,
+    black var(--thickness),
+    transparent var(--thickness)
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    black 0,
+    black var(--thickness),
+    transparent var(--thickness)
+  );
 `;
 
 const BrandName = styled(Link)`
@@ -117,9 +142,9 @@ const Overlay = styled(motion.div)`
   right: 1rem;
   width: auto;
   min-width: 200px;
-  background: color-mix(in srgb, var(--background), transparent 5%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgb(from var(--background) r g b / 0.8);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
   border: 1px solid var(--border-color);
   border-radius: 1rem;
   z-index: 101;
@@ -230,6 +255,7 @@ export default function StickyHeader() {
       // animate={{ y: 0, opacity: 1 }}
       // transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
       >
+        {/* <Backdrop /> */}
         <InnerContainer>
           <BrandName href="/" onClick={scrollToTop}>
             Stelian Fedorca
