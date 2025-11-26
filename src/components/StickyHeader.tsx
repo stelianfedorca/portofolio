@@ -21,7 +21,7 @@ const HeaderContainer = styled.header`
 
 const FloatingBar = styled(motion.div)`
   width: 100%;
-  background: rgb(from var(--background) r g b / 0.8);
+  background-color: rgb(from var(--background) r g b / 0.8);
   backdrop-filter: saturate(180%) blur(12px);
   -webkit-backdrop-filter: saturate(180%) blur(12px);
   /* border-bottom: 1px solid var(--border-color);

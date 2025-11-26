@@ -1,9 +1,8 @@
 "use client";
 
 import styled from "styled-components";
-import { IoMoonOutline, IoSunnyOutline } from "react-icons/io5";
 import { PiSunBold, PiMoonBold } from "react-icons/pi";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { useTheme } from "./ThemeProvider";
 
@@ -41,27 +40,47 @@ const ToggleButton = styled.button`
   &:active {
     transform: scale(0.95);
   }
-
-  svg {
-    font-size: 1.1rem;
-  }
 `;
 
 const ToggleLabel = styled.span`
   font-size: 0.9rem;
 `;
 
-const IconWrap = styled(motion.span)`
+const IconSlot = styled.span`
+  position: relative;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+
+  @media (min-width: 768px) {
+    width: 28px;
+    height: 28px;
+  }
+`;
+
+const IconWrap = styled(motion.span)`
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-size: 22px;
+
   @media (min-width: 768px) {
     font-size: 26px;
   }
 
   svg {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 `;
+
+const iconVariants = {
+  visible: { opacity: 1, rotate: 0, scale: 1 },
+  hidden: { opacity: 0, rotate: -10, scale: 0.95 },
+};
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -69,17 +88,24 @@ export default function ThemeToggle() {
 
   return (
     <ToggleButton onClick={toggleTheme}>
-      <AnimatePresence mode="wait" initial={false}>
+      <IconSlot>
         <IconWrap
-          key={isLight ? "sun" : "moon"}
-          initial={{ opacity: 0, rotate: -20, scale: 0.9 }}
-          animate={{ opacity: 1, rotate: 0, scale: 1 }}
-          exit={{ opacity: 0, rotate: 20, scale: 0.9 }}
+          initial={false}
+          animate={isLight ? "visible" : "hidden"}
+          variants={iconVariants}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
         >
-          {isLight ? <PiSunBold /> : <PiMoonBold />}
+          <PiSunBold />
         </IconWrap>
-      </AnimatePresence>
+        <IconWrap
+          initial={false}
+          animate={isLight ? "hidden" : "visible"}
+          variants={iconVariants}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <PiMoonBold />
+        </IconWrap>
+      </IconSlot>
     </ToggleButton>
   );
 }
