@@ -107,7 +107,7 @@ const NavLink = styled(Link)`
 const MobileNav = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.5rem;
 
   @media (min-width: 768px) {
     display: none;
