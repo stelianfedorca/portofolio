@@ -94,6 +94,7 @@ export default function ThemeToggle() {
           animate={isLight ? "visible" : "hidden"}
           variants={iconVariants}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          suppressHydrationWarning
         >
           <PiSunBold />
         </IconWrap>
@@ -102,6 +103,7 @@ export default function ThemeToggle() {
           animate={isLight ? "hidden" : "visible"}
           variants={iconVariants}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          suppressHydrationWarning
         >
           <PiMoonBold />
         </IconWrap>

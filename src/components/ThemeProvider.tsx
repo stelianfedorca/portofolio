@@ -24,7 +24,10 @@ const STORAGE_KEY = "color-theme";
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
-function applyTheme(nextTheme: Theme) {
+/*
+  Sets the DOM theme attributes
+ */
+function setDocumentTheme(nextTheme: Theme) {
   if (typeof document === "undefined") return;
 
   const root = document.documentElement;
@@ -40,18 +43,36 @@ function getSystemPreference(): Theme {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("light");
+  // lazy initialization using lazy utilizer function
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window !== "undefined") {
+      const themeFromScript = document.documentElement.dataset.theme;
+      if (themeFromScript === "light" || themeFromScript === "dark")
+        return themeFromScript;
+
+      const storedPreference = window.localStorage.getItem(STORAGE_KEY);
+
+      if (storedPreference === "light" || storedPreference === "dark") {
+        return storedPreference;
+      }
+
+      const systemPreference = getSystemPreference();
+      return systemPreference;
+    }
+    return "light";
+  });
 
   useEffect(() => {
-    const storedPreference = window.localStorage.getItem(STORAGE_KEY);
-    const systemPreference = getSystemPreference();
-    const initialTheme =
-      storedPreference === "light" || storedPreference === "dark"
-        ? storedPreference
-        : systemPreference;
+    // const storedPreference = window.localStorage.getItem(STORAGE_KEY);
+    // const systemPreference = getSystemPreference();
+    // const initialTheme =
+    //   storedPreference === "light" || storedPreference === "dark"
+    //     ? storedPreference
+    //     : systemPreference;
 
-    setThemeState(initialTheme);
-    applyTheme(initialTheme);
+    // applyTheme(initialTheme);
+
+    setDocumentTheme(theme);
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
@@ -65,7 +86,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
       const nextTheme = event.matches ? "dark" : "light";
       setThemeState(nextTheme);
-      applyTheme(nextTheme);
+      setDocumentTheme(nextTheme);
     };
 
     mediaQuery.addEventListener("change", handleChange);
@@ -78,14 +99,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const setTheme = useCallback((nextTheme: Theme) => {
     window.localStorage.setItem(STORAGE_KEY, nextTheme);
     setThemeState(nextTheme);
-    applyTheme(nextTheme);
+    setDocumentTheme(nextTheme);
   }, []);
 
   const toggleTheme = useCallback(() => {
     setThemeState((prevTheme) => {
       const nextTheme = prevTheme === "light" ? "dark" : "light";
+
+      // set the new value in localstorage
       window.localStorage.setItem(STORAGE_KEY, nextTheme);
-      applyTheme(nextTheme);
+
+      // update the DOM theme attributes
+      setDocumentTheme(nextTheme);
+
+      // return the new value as state
       return nextTheme;
     });
   }, []);
