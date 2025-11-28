@@ -244,10 +244,6 @@ const HeroButton = styled(Link)`
     margin-top: 3rem;
   }
 
-  svg {
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
   &:hover {
     background: var(--text-primary);
     color: var(--background);
@@ -256,12 +252,16 @@ const HeroButton = styled(Link)`
     box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.15);
   }
 
-  &:hover svg {
-    transform: translateY(3px);
-  }
-
   &:active {
     transform: scale(0.98);
+  }
+
+  svg {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover svg {
+    transform: translateY(3px);
   }
 `;
 
