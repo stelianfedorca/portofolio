@@ -240,6 +240,10 @@ const HeroButton = styled(Link)`
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1);
 
+  @media (min-width: 1100px) {
+    margin-top: 3rem;
+  }
+
   svg {
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
