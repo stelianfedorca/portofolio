@@ -30,6 +30,8 @@ const FloatingBar = styled(motion.div)`
 
   transition: background-color var(--theme-duration) var(--theme-ease),
     border-color var(--theme-duration) var(--theme-ease);
+
+  will-change: transform;
 `;
 
 const InnerContainer = styled.div`
