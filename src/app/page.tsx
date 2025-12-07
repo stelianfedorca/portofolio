@@ -146,6 +146,7 @@ const ProfileImageWrapper = styled.div`
   position: relative;
   width: 100%;
   max-width: 280px;
+  max-height: 280px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
@@ -564,7 +565,14 @@ export default function Home() {
               animate="visible"
             >
               <ProfileImageWrapper>
-                <Image src="/Me.jpeg" alt="Stelian" fill priority />
+                <Image
+                  src="/Me.jpeg"
+                  alt="Portrait of Stelian Fedorca"
+                  height={280}
+                  width={280}
+                  fetchPriority="high"
+                  loading="eager"
+                />
               </ProfileImageWrapper>
             </motion.div>
           </HeroContent>
