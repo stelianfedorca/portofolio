@@ -537,16 +537,17 @@ const EmailLink = styled(SocialLink)`
 `;
 
 const CopyButton = styled.button<{ $copied: boolean }>`
-  width: 44px;
-  height: 44px;
+  height: 36px;
+  width: 36px;
+  position: relative;
   border-radius: 999px;
   border: 1px solid
     ${({ $copied }) => ($copied ? "var(--accent2)" : "var(--border-color)")};
-  background: ${({ $copied }) =>
-    $copied ? "rgba(34, 197, 94, 0.1)" : "transparent"};
+
   color: ${({ $copied }) =>
     $copied ? "var(--accent2)" : "var(--text-primary)"};
   display: inline-flex;
+  background-color: transparent;
   align-items: center;
   justify-content: center;
   transition: color 0.2s, border-color 0.2s, background-color 0.2s;
@@ -561,6 +562,18 @@ const CopyButton = styled.button<{ $copied: boolean }>`
   &:focus-visible {
     outline: 2px solid var(--accent2);
     outline-offset: 2px;
+  }
+
+  &::after {
+    --click-target-minimum: 44px;
+    --inset-by: min(0px, calc((100% - var(--click-target-minimum)) / 2));
+
+    content: "";
+    position: absolute;
+    top: var(--inset-by);
+    left: var(--inset-by);
+    right: var(--inset-by);
+    bottom: var(--inset-by);
   }
 `;
 
