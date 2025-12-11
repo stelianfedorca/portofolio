@@ -488,12 +488,13 @@ const FooterEmail = styled(Link)`
 const SocialLinksWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-top: 2rem;
   width: fit-content;
 `;
 
 const SocialLink = styled.a`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -508,6 +509,18 @@ const SocialLink = styled.a`
 
   &:hover {
     color: var(--accent2);
+  }
+
+  &::after {
+    --click-target-minimum: 44px;
+    --inset-by: min(0px, calc((100% - var(--click-target-minimum)) / 2));
+
+    content: "";
+    position: absolute;
+    top: var(--inset-by);
+    left: var(--inset-by);
+    right: var(--inset-by);
+    bottom: var(--inset-by);
   }
 `;
 
