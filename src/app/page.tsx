@@ -12,10 +12,9 @@ import {
   FaNodeJs,
   FaUniversalAccess,
   FaGitAlt,
-  FaFigma,
   FaArrowDown,
 } from "react-icons/fa";
-import { FiExternalLink, FiPenTool, FiCode, FiCpu } from "react-icons/fi";
+import { FiExternalLink, FiCode, FiCopy, FiCheck } from "react-icons/fi";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -24,8 +23,8 @@ import {
   SiGraphql,
 } from "react-icons/si";
 import { TbBrandFramerMotion } from "react-icons/tb";
-import React, { JSX, useRef } from "react";
-import { inView, motion, useInView, type Variants } from "framer-motion";
+import React, { JSX, useEffect, useRef, useState } from "react";
+import { motion, useInView, type Variants } from "framer-motion";
 
 /*
   Definining animation variants
@@ -503,6 +502,8 @@ const SocialLink = styled.a`
   text-decoration: none;
   transition: color 0.2s;
 
+  width: fit-content;
+
   svg {
     font-size: 1.4rem;
   }
@@ -524,6 +525,45 @@ const SocialLink = styled.a`
   }
 `;
 
+const EmailRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: fit-content;
+`;
+
+const EmailLink = styled(SocialLink)`
+  flex: 1;
+`;
+
+const CopyButton = styled.button<{ $copied: boolean }>`
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid
+    ${({ $copied }) => ($copied ? "var(--accent2)" : "var(--border-color)")};
+  background: ${({ $copied }) =>
+    $copied ? "rgba(34, 197, 94, 0.1)" : "transparent"};
+  color: ${({ $copied }) =>
+    $copied ? "var(--accent2)" : "var(--text-primary)"};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover {
+    color: var(--accent2);
+    border-color: var(--accent2);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent2);
+    outline-offset: 2px;
+  }
+`;
+
 const EmailText = styled.span`
   /* color: var(--text-primary);
   transition: color 0.2s;
@@ -542,6 +582,39 @@ const SubFooter = styled.div`
 `;
 
 export default function Home() {
+  const emailHref = homeContent.footer.email;
+  const emailAddress = emailHref.replace(/^mailto:/, "");
+  const [copied, setCopied] = useState(false);
+  const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleCopyEmail = async () => {
+    if (!navigator?.clipboard) {
+      console.warn("Clipboard API is not available in this browser.");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(emailAddress);
+      setCopied(true);
+      if (copyTimeoutRef.current) {
+        clearTimeout(copyTimeoutRef.current);
+      }
+      copyTimeoutRef.current = setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (error) {
+      console.error("Failed to copy email address:", error);
+    }
+  };
+
   return (
     <Container>
       <MaxWidthWrapper>
@@ -631,9 +704,25 @@ export default function Home() {
           <FooterTitle>{homeContent.footer.title}</FooterTitle>
 
           <SocialLinksWrapper>
-            <SocialLink href={homeContent.footer.email}>
-              <FaEnvelope /> <EmailText>stelian.fedorca25@gmail.com</EmailText>
-            </SocialLink>
+            <EmailRow>
+              <EmailLink href={emailHref}>
+                <FaEnvelope /> <EmailText>{emailAddress}</EmailText>
+              </EmailLink>
+              <CopyButton
+                type="button"
+                onClick={handleCopyEmail}
+                aria-label={
+                  copied ? "Email copied to clipboard" : "Copy email address"
+                }
+                $copied={copied}
+              >
+                {copied ? (
+                  <FiCheck aria-hidden="true" size={16} />
+                ) : (
+                  <FiCopy aria-hidden="true" size={16} />
+                )}
+              </CopyButton>
+            </EmailRow>
 
             <SocialLink
               href={homeContent.footer.socialLinks.linkedin}
