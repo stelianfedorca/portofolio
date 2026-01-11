@@ -14,7 +14,13 @@ import {
   FaGitAlt,
   FaArrowDown,
 } from "react-icons/fa";
-import { FiExternalLink, FiCode, FiCopy, FiCheck } from "react-icons/fi";
+import {
+  FiExternalLink,
+  FiCode,
+  FiCopy,
+  FiCheck,
+  FiArrowRight,
+} from "react-icons/fi";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -301,7 +307,7 @@ const SkillsSection = styled.section`
 const SectionTitle = styled.h3`
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
   letter-spacing: -0.02em;
 `;
 
@@ -354,33 +360,41 @@ const WorkGrid = styled.div`
   }
 `;
 
-const ProjectCard = styled.div`
+const ProjectCard = styled.a`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   cursor: pointer;
-  transition: transform 0.2s;
+  text-decoration: none;
+  color: inherit;
 
-  &:hover {
-    transform: translateY(-5px);
+  &:focus-visible {
+    outline: 2px solid var(--accent2);
+    outline-offset: 4px;
   }
 `;
 
 const ProjectImage = styled.div`
   width: 100%;
-  aspect-ratio: 16/10;
-  background-color: var(--bg-tertiary);
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-secondary);
   position: relative;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: box-shadow 0.3s ease;
 
   img {
-    object-fit: cover;
+    object-fit: contain;
     transition: transform 0.5s ease;
   }
 
+  ${ProjectCard}:hover & {
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+  }
+
   ${ProjectCard}:hover img {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 `;
 
@@ -398,11 +412,29 @@ const ProjectDesc = styled.p`
 `;
 
 const ProjectLink = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 4px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--accent2);
+  }
+
+  svg {
+    transition: transform 0.2s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
 `;
 
 type SkillIconKey =
@@ -698,13 +730,21 @@ export default function Home() {
             <SectionTitle>{homeContent.projects.title}</SectionTitle>
             <WorkGrid>
               {homeContent.projects.items.map((project) => (
-                <ProjectCard key={project.title}>
+                <ProjectCard
+                  key={project.title}
+                  href={project.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <ProjectImage>
                     <Image src={project.image} alt={project.title} fill />
                   </ProjectImage>
                   <ProjectTitle>{project.title}</ProjectTitle>
                   <ProjectDesc>{project.description}</ProjectDesc>
-                  <ProjectLink>{project.link}</ProjectLink>
+                  <ProjectLink>
+                    {project.link}
+                    <FiArrowRight size={16} />
+                  </ProjectLink>
                 </ProjectCard>
               ))}
             </WorkGrid>

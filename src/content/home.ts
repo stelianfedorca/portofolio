@@ -27,18 +27,12 @@ export const homeContent = {
     title: "What I've been working on",
     items: [
       {
-        title: "Analytics Dashboard",
+        title: "DocLens: Full-Stack AI Document Analyzer",
         description:
-          "A modern analytics platform for tracking user engagement and growth metrics.",
-        image: "/project1.png",
+          "Built with Next.js and Firebase, this tool automates document processing using asynchronous Cloud Functions and Gemini AI to provide real-time summaries and data extraction",
+        image: "/doclense-document-analyzer-app.png",
         link: "View Project",
-      },
-      {
-        title: "Travel Companion App",
-        description:
-          "Mobile-first application helping travelers find the best local spots and hidden gems.",
-        image: "/project2.png",
-        link: "View Project",
+        href: "https://document-analyzer-llm-4rq1-8x95yk7v9-stelian-fedorcas-projects.vercel.app/analyze/upload",
       },
     ],
   },
