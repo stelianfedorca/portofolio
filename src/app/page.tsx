@@ -356,7 +356,7 @@ const WorkGrid = styled.div`
   gap: 4rem;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 `;
 
