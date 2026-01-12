@@ -32,7 +32,7 @@ export const homeContent = {
           "Built with Next.js and Firebase, this tool automates document processing using asynchronous Cloud Functions and Gemini AI to provide real-time summaries and data extraction",
         image: "/doclense-document-analyzer-app.png",
         link: "View Project",
-        href: "https://document-analyzer-llm-4rq1-8x95yk7v9-stelian-fedorcas-projects.vercel.app/analyze/upload",
+        href: "https://document-analyzer-llm-4rq1.vercel.app",
       },
     ],
   },
